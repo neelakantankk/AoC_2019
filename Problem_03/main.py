@@ -55,6 +55,9 @@ class Path:
 def calculate_distance(point):
     return int(abs(point.x) + abs(point.y))
 
+def calculate_timing(point, wire_one, wire_two):
+    return (wire_one.path.index(point) + wire_two.path.index(point))
+
 def main():
     
     path_listing = []
@@ -83,6 +86,17 @@ def main():
             minimum_distance = distance
 
     print(f"Least distance: {minimum_distance}")
+
+    minimum_timing = calculate_timing(intersections[0], wire_one, wire_two)
+
+    for intersection in intersections[1:]:
+        timing = calculate_timing(intersection, wire_one, wire_two)
+        if timing < minimum_timing:
+            print(intersection)
+            minimum_timing = timing
+
+    print(f"Least time: {minimum_timing}")
+
  
 if __name__ == '__main__':
     main()
