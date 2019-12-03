@@ -34,11 +34,9 @@ class Path:
             self.path.append(new_point)
 
     def intersection_points(self, other_path):
-        intersection_points = list()
-        for point in other_path.path[1:]:
-            if point in self.path:
-                intersection_points.append(point)
-        return intersection_points
+        self_set = set(self.path[1:])
+        other_set = set(other_path.path[1:])
+        return self_set & other_set
 
     def create_path(self, listing):
         for instruction in listing:
@@ -55,7 +53,7 @@ class Path:
                 self.go_down(steps)
 
 def calculate_distance(point):
-    return int(point.x + point.y)
+    return int(abs(point.x) + abs(point.y))
 
 def main():
     
@@ -71,6 +69,10 @@ def main():
     wire_two.create_path(path_listing[1])
 
     intersections = wire_one.intersection_points(wire_two)
+
+    print(intersections)
+
+    intersections = list(intersections)
 
     minimum_distance = calculate_distance(intersections[0])
 
