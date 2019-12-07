@@ -138,9 +138,6 @@ def do_op(instructions, opcode, parameter_modes, opcode_idx):
         else:
             instructions[get_store_at()] = 0
 
-
-
-
     return None
 
 def main():
