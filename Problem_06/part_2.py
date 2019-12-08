@@ -1,4 +1,5 @@
 import argparse
+import pprint
 
 def main():
     parser = argparse.ArgumentParser(description="Select input file")
@@ -17,7 +18,24 @@ def main():
             indirects[child] = indirects.get(child,0) + 1
             parent = orbits[parent]
 
-    print(sum(indirects.values()) + len(orbits.keys()))
+    my_parent = orbits['YOU']
+    my_path_to_COM = []
+    parent = my_parent
+    while parent in orbits.keys():
+        my_path_to_COM.append(parent)
+        parent = orbits[parent]
+
+    santa_parent = orbits['SAN']
+    santa_path_to_COM = []
+    parent = santa_parent
+    while parent in orbits.keys():
+        santa_path_to_COM.append(parent)
+        parent = orbits[parent]
+
+    for orb in my_path_to_COM:
+        if orb in santa_path_to_COM:
+            print(my_path_to_COM.index(orb) + santa_path_to_COM.index(orb))
+            break
 
 if __name__ == '__main__':
     main()
